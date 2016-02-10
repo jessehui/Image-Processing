@@ -93,6 +93,7 @@ From XYZ to xyY: x = X/(X+Y+Z),y = Y/(X+Y+Z) means color information, Y means lu
 <br/>
 
 7
+
 CIE Chromaticity Diagram: People can only see the color inside the horse-shoe shape.
 Dots near the outline represent more saturated(饱和的, 湿透的) colors.  Near the center represent washed out colors.
 Ideal white is at (x,y) = (0.33,0.33) and correspond to the illuminant. Ideal black is at the same point as ideal white since CIE chromaticity diagram does not capture illuminance information.
