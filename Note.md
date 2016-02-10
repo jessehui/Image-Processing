@@ -71,3 +71,40 @@ Weber ratio = ```
 𝛥Ic/I
 ```I - light source intensity  𝛥Ic - increment in light source intensity
 Weber ratio describes visual system ability to discriminate between change in light intensity at a particular point. The smaller, the better (more sensitive) .
+
+5
+
+Commonly color temperature is associated with an illuminant.
+Light emitted by black body has spectrally dominant component that moves from red to blue as temperature increase.
+color is defined by `light`, `object`, `human visual system`.
+<br/>
+<br/>
+
+6
+
+Color modules:
+(1)device independent: same color on all output media like XYZ(corresponding to Blue, Green, Red), xyY, L*a*b*
+(2)device dependent: different color all different devices for the same color like RGB
+
+XYZ color space:
+measure the spectrum of the light source; measure the spectrum of the light reflected from the object; for each wavelength band, multiply the reflectance factor; Integrate over all the wavelength.
+From XYZ to xyY: x = X/(X+Y+Z),y = Y/(X+Y+Z) means color information, Y means luminance information
+<br/>
+<br/>
+
+7
+CIE Chromaticity Diagram: People can only see the color inside the horse-shoe shape.
+Dots near the outline represent more saturated(饱和的, 湿透的) colors.  Near the center represent washed out colors.
+Ideal white is at (x,y) = (0.33,0.33) and correspond to the illuminant. Ideal black is at the same point as ideal white since CIE chromaticity diagram does not capture illuminance information.
+Chromaticity diagram does not represent the color graduation uniformly. And Minimum distance between two discernible color in the left lower corner and towards the top.
+
+L*a*b* color space results in more on uniformity.
+
+RGB obtained by matrix operation is in range of `(0,100)`
+Scale down by 100 to get values between (0,1)
+Scale it up depending on the number of bits available (e.g. for 8 bits by 255)
+
+luminance 亮度
+illuminance 照明启发
+<br/>
+<br/>
