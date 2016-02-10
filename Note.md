@@ -67,7 +67,7 @@ Light intensity < Brightness adaption level - small range
 Light intensity >  Brightness adaption level - small range
 => visual system adapts to new brightness adaption level
 
-Weber ratio = ```math
+Weber ratio = ```
 𝛥Ic/I
 ```I - light source intensity  𝛥Ic - increment in light source intensity
 Weber ratio describes visual system ability to discriminate between change in light intensity at a particular point. The smaller, the better (more sensitive) .
