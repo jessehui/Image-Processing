@@ -21,6 +21,7 @@ Write a code that performs local histogram equalization with a window of 15x15 p
 ##Problem 3
 Analyze the noisy image “nasaNoise.jpg” and find the properties of the interference noise. Design a filter to remove the interference. Plot the Fourier transform of the filter in 3D and print the image before and after filtering. Explain in detail your analysis and design.
 
+
 ![image](https://github.com/jessehui/Image-Processing/blob/master/src/nasaNoise%20_1_.jpg)
 
 ###Analysis:
@@ -54,3 +55,18 @@ The image “PeanutRotated.jpg” is distorted by rotation, translation and scal
 
 ###result:
 ![image](https://github.com/jessehui/Image-Processing/blob/master/src/R5.png)
+
+##Problem 6
+Deomsaicing.
+![image](https://github.com/jessehui/Image-Processing/blob/master/src/rawimage.bmp)
+
+
+###result:
+![image](https://github.com/jessehui/Image-Processing/blob/master/src/GRimg.jpg)
+Image created with only the red pixels
+
+![image](https://github.com/jessehui/Image-Processing/blob/master/src/Ful_img_ne.jpg)
+Image demosaicing using nearest neighbor method
+
+![image](https://github.com/jessehui/Image-Processing/blob/master/src/Ful_img_ne.jpg)
+Image demosaicing using bi-linear method
