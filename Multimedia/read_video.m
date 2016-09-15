@@ -17,7 +17,11 @@
 filename = 'My_video.mp4';
 obj_video = VideoReader(filename);
 numFrames = obj_video.NumberOfFrames;
-numFrames_test = numFrames - 190;
+numFrames_test = numFrames - 193;
+height = obj_video.Height;
+width = obj_video.Width;
+frameRate = ceil(obj_video.FrameRate);         % number of frames per second\
+Fs = double(height*width*frameRate);        %sampling frequency
 
 %2. convert the frame of the video from RGB space to YIQ space
 frame = uint8(zeros(obj_video.Height, obj_video.Width, 3, numFrames));  %get  all indexes for each pixel of each frame
@@ -43,24 +47,77 @@ for k = 1: numFrames_test
     Q(:,:,k) = frame_YIQ(:,:,3,k);
 end
 
+N = height*width*numFrames_test;
+y = zeros(1, N);
+m=1;
+for k = 1: numFrames_test
+    for i = 1: height
+        for j = 1: width
+            y(m) = Y(i,j,k);   %(height, width, frame)
+            m = m+1;
+        end
+    end
+end
+
+Y_FFT = fft(y);
+%n = 1:N-1;
+%f = n*Fs/N;
+%plot(f, Y_FFT);
+
+Fc = 4.2*10^6;              %cut off frequency
+[b,a] = butter(10,Fc/(Fs/2));       % 10th order butterworth low pass filter. cut off frequency 4.2MHz
+Y_filtered = filter(b,a,Y_FFT);
+
+
+
+
+
+
+
 
 % receiver side
+ComSig_received = Y_filtered;   %???composite signal, ?????Y  !!!!
 
-% 1. receive the composite signal and extract Y I Q components
-rec_frame_YIQ = double(zeros(obj_video.Height, obj_video.Width, 3, numFrames));
+Fc_rec = 3*10^6;    %cut off frequency at receiver side to seperate luminance and chominance
+[b2,a2] = butter(10, Fc/(Fs/2));
+Y_seperated = filter(b2,a2,ComSig_received);
 
-% 2. convert YIQ space into RGB space
-rec_frame_RGB = uint8(rec_frame_YIQ);
+y_rec =abs(ifft(Y_seperated));
 
-for k = 1: numFrames - eff
-    rec_frame_RGB(:,:,:,k) = ntsc2rgb(rec_frame_YIQ(:,:,:,k));
+
+Y_rec = zeros(obj_video.Height, obj_video.Width, numFrames_test);
+m = 1;
+for k = 1: numFrames_test
+    for i = 1: height
+        for j = 1: width
+            Y_rec(i,j,k) = y_rec(m);   %(height, width, frame)
+            m = m+1;
+        end
+    end
 end
 
-for k = 1: numFrames - eff
-    imshow(rec_frame_RGB(:,:,:,k));
+figure
+for k = 1: numFrames_test
+    imshow(Y_rec(:,:,k));
 end
 
-    
+
+
+% % 1. receive the composite signal and extract Y I Q components
+% rec_frame_YIQ = double(zeros(obj_video.Height, obj_video.Width, 3, numFrames));
+% 
+% % 2. convert YIQ space into RGB space
+% rec_frame_RGB = uint8(rec_frame_YIQ);
+% 
+% for k = 1: numFrames - eff
+%     rec_frame_RGB(:,:,:,k) = ntsc2rgb(rec_frame_YIQ(:,:,:,k));
+% end
+% 
+% for k = 1: numFrames - eff
+%     imshow(rec_frame_RGB(:,:,:,k));
+% end
+% 
+%     
 
 
 
