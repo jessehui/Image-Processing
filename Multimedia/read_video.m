@@ -17,7 +17,7 @@ clc;
 filename = 'My_video.mp4';
 obj_video = VideoReader(filename);
 numFrames = obj_video.NumberOfFrames;
-numFrames_test = numFrames - 170;
+numFrames_test = numFrames - 130;
 height = obj_video.Height;
 width = obj_video.Width;
 frameRate = ceil(obj_video.FrameRate);         % number of frames per second
@@ -160,6 +160,15 @@ for k = 1: numFrames_test
     imshow(frame_RGB_rec(:,:,:,k));
     pause(0.5);
 end
+
+video_rec_obj = VideoWriter('Video_Rec');
+video_rec_obj.FrameRate = frameRate;
+
+open(video_rec_obj);
+for k = 1: numFrames_test
+    writeVideo(video_rec_obj, frame_RGB_rec(:,:,:,k));
+end
+close(video_rec_obj);
 
 
 
